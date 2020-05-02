@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperWebApi", "DapperWebApi\DapperWebApi.csproj", "{7E5B7F29-C81D-4AC6-BD31-BD0967640B09}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DapperDatabase", "DapperDatabase\DapperDatabase.sqlproj", "{4AF87AFE-2596-478B-A3E3-56036378FE30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperBusiness", "DapperBusiness\DapperBusiness.csproj", "{1F338A72-6A80-4D8E-A242-F8224F6ED72F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperContracts", "DapperContracts\DapperContracts.csproj", "{9365636A-F1E5-4920-BF07-D84EAA8D8183}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,20 @@ Global
 		{7E5B7F29-C81D-4AC6-BD31-BD0967640B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E5B7F29-C81D-4AC6-BD31-BD0967640B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E5B7F29-C81D-4AC6-BD31-BD0967640B09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AF87AFE-2596-478B-A3E3-56036378FE30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AF87AFE-2596-478B-A3E3-56036378FE30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AF87AFE-2596-478B-A3E3-56036378FE30}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4AF87AFE-2596-478B-A3E3-56036378FE30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AF87AFE-2596-478B-A3E3-56036378FE30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AF87AFE-2596-478B-A3E3-56036378FE30}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1F338A72-6A80-4D8E-A242-F8224F6ED72F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F338A72-6A80-4D8E-A242-F8224F6ED72F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F338A72-6A80-4D8E-A242-F8224F6ED72F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F338A72-6A80-4D8E-A242-F8224F6ED72F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9365636A-F1E5-4920-BF07-D84EAA8D8183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9365636A-F1E5-4920-BF07-D84EAA8D8183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9365636A-F1E5-4920-BF07-D84EAA8D8183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9365636A-F1E5-4920-BF07-D84EAA8D8183}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DapperBusiness.Features;
+using DapperContracts.Houses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DapperWebApi.Controllers
@@ -10,11 +12,20 @@ namespace DapperWebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly GetHouseEvents _getHouseEvents;
+        private readonly SaveHouseEvents _saveHouseEvents;
+
+        public ValuesController(GetHouseEvents getHouseEvents, SaveHouseEvents saveHouseEvents)
+        {
+            _getHouseEvents = getHouseEvents;
+            _saveHouseEvents = saveHouseEvents;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<Event>>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _getHouseEvents.Get());
         }
 
         // GET api/values/5
@@ -26,8 +37,9 @@ namespace DapperWebApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Event>> Post([FromBody] Event @event)
         {
+            return Accepted(await _saveHouseEvents.Save(@event));
         }
 
         // PUT api/values/5

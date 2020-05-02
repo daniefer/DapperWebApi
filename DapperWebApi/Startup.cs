@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using DapperBusiness;
+using DapperWebApi.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,13 +29,26 @@ namespace DapperWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<IDbConnection, SqlConnection>(sp =>
+            {
+                var connectionString = Configuration.GetConnectionString("Default");
+                var dbConnection = new SqlConnection(connectionString);
+                return dbConnection;
+            });
+            services.AddFeatures();
+            services.AddControllers().AddJsonOptions(opts => {
+                opts.JsonSerializerOptions.Converters.Add(new DateTimeOffsetConverter());
+                opts.JsonSerializerOptions.Converters.Add(new DateConverter());
+                opts.JsonSerializerOptions.Converters.Add(new DateTimeConverter());
+                opts.JsonSerializerOptions.Converters.Add(new TimeZoneInfoConverter());
+            });
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -42,7 +59,11 @@ namespace DapperWebApi
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
