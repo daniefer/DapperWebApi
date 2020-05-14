@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using DapperContracts.Houses;
@@ -18,15 +15,25 @@ namespace DapperBusiness.Features
             _db = db;
         }
 
-        public async Task<IEnumerable<Event>> Get()
+        public async Task<IEnumerable<Event>> Get(ICollection<int> ids)
         {
             var command = new CommandDefinition(@"
                 SELECT e.*, s.* 
                 FROM [House].[Events] e
-                INNER JOIN [House].[EventSources] s
-                    ON e.EventSourceId = s.Id
-                WHERE Id in @ids", new { ids = new[] { 1, 2, 3 } });
-            return await _db.QueryAsync<Event>(command);
+                INNER JOIN [House].[Sources] s
+                    ON e.SourceId = s.Id
+                WHERE e.Id in @ids", new { ids });
+            return await _db.QueryAsync<Event, Source, Event>(command, (e, s) => { e.Source = s; return e; });
+        }
+
+        public async Task<IEnumerable<Event>> GetAll()
+        {
+            var command = new CommandDefinition(@"
+                SELECT e.*, s.* 
+                FROM [House].[Events] e
+                INNER JOIN [House].[Sources] s
+                    ON e.SourceId = s.Id");
+            return await _db.QueryAsync<Event, Source, Event>(command, (e, s) => { e.Source = s; return e; });
         }
     }
 }

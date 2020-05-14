@@ -11,7 +11,10 @@ namespace DapperBusiness
             DapperUtilities.RegisterDapperHandlers();
 
             services.TryAddTransient<GetHouseEvents>();
+            services.TryAddTransient<GetHouseSources>();
+            services.TryAddTransient<GetHouseEventTypes>();
             services.TryAddTransient<SaveHouseEvents>();
+            services.TryAddTransient<SaveHouseSources>();
 
             return services;
         }
